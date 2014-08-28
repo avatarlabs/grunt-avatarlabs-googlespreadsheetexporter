@@ -1,0 +1,47 @@
+{
+  "name": "grunt-avatarlabs-googlespreadsheetexporter",
+  "description": "Export language file from Google Spreadsheets using your Google Account.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jleplomet/grunt-avatarlabs-googlespreadsheetexporter",
+  "author": {
+    "name": "Jeff Leplomet",
+    "email": "jeff@avatarlabs.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jleplomet/grunt-avatarlabs-googlespreadsheetexporter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jleplomet/grunt-avatarlabs-googlespreadsheetexporter/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jleplomet/grunt-avatarlabs-googlespreadsheetexporter/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "async": "^0.9.0",
+    "edit-google-spreadsheet": "^0.2.7",
+    "grunt": "~0.4.5",
+    "keychain": "0.0.4",
+    "read": "^1.0.5",
+    "stdio": "^0.2.2",
+    "underscore": "^1.7.0"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "dependencies": {
+    "edit-google-spreadsheet": "^0.2.7"
+  }
+}
