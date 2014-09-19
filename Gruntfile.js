@@ -18,7 +18,8 @@ module.exports = function (grunt) {
       options: {
         username: 'jeff@avatarlabs.com',
         spreadSheetId: '0AqGGDjzAOsLPdFdxdGdFaHpaMzA5b2d3a1lLRzFMdWc',
-        worksheetName: ['en_us'],
+        useCellTextValues: false,
+        worksheetName: ['eng'],
         format: 'json'
       },
       dev: {

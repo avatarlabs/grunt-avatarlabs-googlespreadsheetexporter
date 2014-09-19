@@ -89,7 +89,8 @@ Task.runTask = function (grunt, options) {
       spreadsheetId: options.spreadSheetId,
       worksheetName: sheet,
       username: options.username,
-      password: options.password
+      password: options.password,
+      useCellTextValues: (_.has(options, 'useCellTextValues')) ? options.useCellTextValues : true
     }, function (error, spreadsheet) {
       if (error) {
         throw error;

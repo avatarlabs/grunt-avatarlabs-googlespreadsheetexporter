@@ -33,15 +33,12 @@
     "read": "^1.0.5",
     "stdio": "^0.2.2",
     "underscore": "^1.7.0",
-    "edit-google-spreadsheet": "^0.2.7"
+    "edit-google-spreadsheet": "~0.2.11"
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
   },
   "keywords": [
     "gruntplugin"
-  ],
-  "dependencies": {
-    "edit-google-spreadsheet": "^0.2.7"
-  }
+  ]
 }
