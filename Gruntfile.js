@@ -17,9 +17,15 @@ module.exports = function (grunt) {
     googlespreadsheetexporter: {
       options: {
         username: 'jeff@avatarlabs.com',
+<<<<<<< HEAD
         spreadSheetId: '1nI8gLC2OaPjWwbt5m2G8mzi1oY1Hrchl6O13YxuGECY',
         worksheetName: 'lang',
         languages: ['eng', 'es', 'de'],
+=======
+        spreadSheetId: '0AqGGDjzAOsLPdFdxdGdFaHpaMzA5b2d3a1lLRzFMdWc',
+        useCellTextValues: false,
+        worksheetName: ['eng'],
+>>>>>>> FETCH_HEAD
         format: 'json'
       },
       dev: {

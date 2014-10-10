@@ -82,6 +82,7 @@ Task.askForPassword = function (grunt, options) {
 }
 
 Task.runTask = function (grunt, options) {
+<<<<<<< HEAD
   GoogleSpreadsheet.load({
     debug: false,
     spreadsheetId: options.spreadSheetId,
@@ -89,6 +90,31 @@ Task.runTask = function (grunt, options) {
     username: options.username,
     password: options.password
   }, function (error, spreadsheet) {
+=======
+  async.eachSeries(options.worksheetName, function (sheet, callback) {
+    GoogleSpreadsheet.load({
+      debug: false,
+      spreadsheetId: options.spreadSheetId,
+      worksheetName: sheet,
+      username: options.username,
+      password: options.password,
+      useCellTextValues: (_.has(options, 'useCellTextValues')) ? options.useCellTextValues : true
+    }, function (error, spreadsheet) {
+      if (error) {
+        throw error;
+      }
+
+      spreadsheet.receive(function (error, rows, info) {
+        if (error) {
+          throw error;
+        }
+
+        //write file.
+        GoogleSpreadsheetFile.createFile(rows, options.format, options.dest, sheet, callback);
+      });
+    });
+  }, function (error) {
+>>>>>>> FETCH_HEAD
     if (error) {
       throw error;
     }
