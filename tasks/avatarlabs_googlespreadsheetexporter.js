@@ -9,7 +9,6 @@
 'use strict';
 
 var async                 = require('async');
-var stdio                 = require('stdio');
 var read                  = require('read');
 var keychain              = require('keychain');
 var _                     = require('underscore');

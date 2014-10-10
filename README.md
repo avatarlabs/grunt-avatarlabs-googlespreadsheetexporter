@@ -29,7 +29,8 @@ grunt.initConfig({
       // Task-specific options go here.
       username: '', //Google Account Email Address
       spreadSheetId: '',
-      worksheetName: ['en_us', 'es_mx'],
+      worksheetName: 'lang',
+      languages: ['eng', 'es']
       format: 'json'
     },
     your_target: {
@@ -55,10 +56,16 @@ Required
 The ID of your spreadsheet.
 
 #### options.worksheetName
+Type: `String`
+Required
+
+The current name of your worksheet.
+
+#### options.languages
 Type: `Array`
 Required
 
-The current name of your worksheet. This is will also be used as the generated file's name.
+The current supported languages. In your sheet, this will be a column. This is will also be used as the generated file's name.
 
 ## Contributing
 Coming soon.
