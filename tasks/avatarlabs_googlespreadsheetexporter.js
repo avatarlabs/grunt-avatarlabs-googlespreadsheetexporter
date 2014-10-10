@@ -83,34 +83,61 @@ Task.askForPassword = function (grunt, options) {
 }
 
 Task.runTask = function (grunt, options) {
-  async.eachSeries(options.worksheetName, function (sheet, callback) {
-    GoogleSpreadsheet.load({
-      debug: false,
-      spreadsheetId: options.spreadSheetId,
-      worksheetName: sheet,
-      username: options.username,
-      password: options.password
-    }, function (error, spreadsheet) {
-      if (error) {
-        throw error;
-      }
-
-      spreadsheet.receive(function (error, rows, info) {
-        if (error) {
-          throw error;
-        }
-
-        //write file.
-        GoogleSpreadsheetFile.createFile(rows, options.format, options.dest, sheet, callback);
-      });
-    });
-  }, function (error) {
+  GoogleSpreadsheet.load({
+    debug: false,
+    spreadsheetId: options.spreadSheetId,
+    worksheetName: options.worksheetName,
+    username: options.username,
+    password: options.password
+  }, function (error, spreadsheet) {
     if (error) {
       throw error;
     }
 
-    done();
+    spreadsheet.receive(function (error, rows, info) {
+      if (error) throw error;
+
+      var sheetHeaders = rows['1'];
+
+      sheetHeaders = _.invert(sheetHeaders);
+      
+      async.eachSeries(options.languages, function (language, callback) {
+        var languageRows = [];
+
+        //create an object based on the language
+        _.each(rows, function (row, index) {
+          //skip first row
+          if (index == 1) return;
+
+          var languageRowObj = {};
+
+          //Tag will always exist
+          languageRowObj[sheetHeaders.TAG] = row[sheetHeaders.TAG];
+
+          if (_.has(row, sheetHeaders.VALUE)) {
+            languageRowObj[sheetHeaders.VALUE] = ( _.has(row, sheetHeaders[language]) ) ? row[ sheetHeaders[language] ] : row[sheetHeaders.VALUE];
+          }
+
+          if (_.has(row, sheetHeaders.ATTRIBUTES)) {
+            languageRowObj[sheetHeaders.ATTRIBUTES] = row[sheetHeaders.ATTRIBUTES];
+          }
+
+          if (_.has(row, sheetHeaders.PARENT)) {
+            languageRowObj[sheetHeaders.PARENT] = row[sheetHeaders.PARENT];
+          }
+
+          languageRows.push(languageRowObj);
+        });
+
+        GoogleSpreadsheetFile.createFile(languageRows, options.format, options.dest, language, callback);
+      }, function (error) {
+        if (error) throw error;
+
+        done();
+      })
+    })
   });
 }
+
 
 module.exports = Task;
