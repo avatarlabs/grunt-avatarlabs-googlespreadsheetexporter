@@ -128,8 +128,6 @@ Task.runTask = function (grunt, options) {
           languageRows.push(languageRowObj);
         });
 
-        console.log(languageRows);
-
         GoogleSpreadsheetFile.createFile(languageRows, options.format, options.dest, language, callback);
       }, function (error) {
         if (error) throw error;
