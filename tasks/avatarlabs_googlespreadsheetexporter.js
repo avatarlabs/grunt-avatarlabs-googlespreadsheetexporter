@@ -87,7 +87,8 @@ Task.runTask = function (grunt, options) {
     spreadsheetId: options.spreadSheetId,
     worksheetName: options.worksheetName,
     username: options.username,
-    password: options.password
+    password: options.password,
+    useCellTextValues: (_.has(options, 'useCellTextValues')) ? options.useCellTextValues : true
   }, function (error, spreadsheet) {
 
     if (error) throw error;
@@ -126,6 +127,8 @@ Task.runTask = function (grunt, options) {
 
           languageRows.push(languageRowObj);
         });
+
+        console.log(languageRows);
 
         GoogleSpreadsheetFile.createFile(languageRows, options.format, options.dest, language, callback);
       }, function (error) {
