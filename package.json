@@ -1,11 +1,11 @@
 {
   "name": "grunt-avatarlabs-googlespreadsheetexporter",
   "description": "Export language file from Google Spreadsheets using your Google Account.",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "homepage": "https://github.com/jleplomet/grunt-avatarlabs-googlespreadsheetexporter",
   "author": {
     "name": "Jeff Leplomet",
-    "email": "jeff@avatarlabs.com"
+    "email": "jleplomet@gmail.com"
   },
   "repository": {
     "type": "git",
