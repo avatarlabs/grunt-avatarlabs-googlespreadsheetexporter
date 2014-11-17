@@ -27,7 +27,6 @@ grunt.initConfig({
   googlespreadsheetexporter: {
     options: {
       // Task-specific options go here.
-      username: '', //Google Account Email Address
       spreadSheetId: '',
       worksheetName: 'lang',
       languages: ['eng', 'es']
@@ -42,12 +41,6 @@ grunt.initConfig({
 ```
 
 ### Options
-
-#### options.username
-Type: `String`
-Required
-
-Google Account email address.
 
 #### options.spreadSheetId
 Type: `String`

@@ -15,7 +15,10 @@ var _                     = require('underscore');
 var GoogleSpreadsheet     = require('edit-google-spreadsheet');
 var GoogleSpreadsheetFile = require('../lib/GoogleSpreadsheetFile');
 
-var done;
+var done, 
+    KEYCHAIN_ACCOUNT = "google_spreadsheet_exporter_account",
+    KEYCHAIN_SERVICE = "google_spreadsheet_exporter",
+    KEYCHAIN_TYPE    = "internet";
 
 function Task (grunt) {
   grunt.registerMultiTask('googlespreadsheetexporter', 'Export language file from Google Spreadsheets using your Google Account.', function () {
@@ -30,25 +33,41 @@ function Task (grunt) {
       grunt.file.mkdir(options.dest)
     }
 
-    //check user's password exists in the keychain, if not, request.
-    //we can define the password in grunt options but that might
-    //suck if projects are shared. It will be a dev known option only.
-    if (!_.has(options, 'password')) {
-      keychain.getPassword({account: options.username, service: 'google_spreadsheet_exporter', type: 'internet'}, function (err, password) {
-        if (err) {
-          grunt.log.warn('WARNING: ' + err.message);
+    //check user's email, password exists in the keychain, if not, request.
 
-          return Task.askForPassword(grunt, options);
-        }
+    keychain.getPassword({ account: KEYCHAIN_ACCOUNT, service: KEYCHAIN_SERVICE, type: KEYCHAIN_TYPE }, function ( err, password ) {
+      if (err) {
+        grunt.log.warn('WARNING: ' + err.message);
 
-        options.password = password;
+        return Task.askForEmail(grunt, options);
+      }
 
-        Task.runTask(grunt, options);
-      });
-    }
-    else {
+      var gAccount = password.split(":"), gEmail = gAccount[0], gPass = gAccount[1];
+
+      options.username = gEmail;
+      options.password = gPass;
+
       Task.runTask(grunt, options);
+    });
+  });
+}
+
+Task.askForEmail = function (grunt, options) {
+  // read user's email
+  read({
+    prompt: 'Google Account Email: '
+  }, function (error, email) {
+    if (error) return grunt.fail.warn(error.message);
+
+    if (!email || email === '') {
+      grunt.log.warn('Please enter your email.');
+
+      return Task.askForEmail(grunt, options);
     }
+
+    options.username = email;
+
+    Task.askForPassword(grunt, options);
   });
 }
 
@@ -68,7 +87,9 @@ Task.askForPassword = function (grunt, options) {
     }
 
     //save users password to keychain for later use.
-    keychain.setPassword({ account: options.username, service: 'google_spreadsheet_exporter', type: 'internet', password: password }, function (error) {
+    var gAccount = options.username + ":" + password;
+
+    keychain.setPassword({ account: KEYCHAIN_ACCOUNT, service: KEYCHAIN_SERVICE, type: KEYCHAIN_TYPE, password: gAccount}, function (error) {
       if (error) {
         return grunt.fail.warn(error.message);
       }
@@ -80,6 +101,7 @@ Task.askForPassword = function (grunt, options) {
     });
   })
 }
+
 
 Task.runTask = function (grunt, options) {
   GoogleSpreadsheet.load({

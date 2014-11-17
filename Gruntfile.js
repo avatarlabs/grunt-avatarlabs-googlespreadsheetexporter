@@ -16,7 +16,6 @@ module.exports = function (grunt) {
 
     googlespreadsheetexporter: {
       options: {
-        username: 'jeff@avatarlabs.com',
         spreadSheetId: '1nI8gLC2OaPjWwbt5m2G8mzi1oY1Hrchl6O13YxuGECY',
         worksheetName: 'lang',
         languages: ['eng', 'es', 'de'],
