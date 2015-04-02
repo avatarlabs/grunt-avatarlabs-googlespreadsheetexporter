@@ -2,10 +2,9 @@
  * grunt-avatarlabs-googlespreadsheetexporter
  * https://github.com/jleplomet/grunt-avatarlabs-googlespreadsheetexporter
  *
- * Copyright (c) 2014 Jeff Leplomet
- * Licensed under the MIT license.
+ * Agency: Avatarlabs
+ * Developer: Jeff Leplomet <jeff@avatarlabs.com>
  */
-
 'use strict';
 
 module.exports = function (grunt) {
@@ -16,9 +15,9 @@ module.exports = function (grunt) {
 
     googlespreadsheetexporter: {
       options: {
-        spreadSheetId: '1nI8gLC2OaPjWwbt5m2G8mzi1oY1Hrchl6O13YxuGECY',
+        spreadSheetId: '1zUoZEpZW2x5JTknjswAARUghNBf8fx0gX7BzaVMoLwQ',
         worksheetName: 'lang',
-        languages: ['eng', 'es', 'de'],
+        languages: ['eng', 'es'],
         useCellTextValues: false,
         format: 'json'
       },
