@@ -59,9 +59,3 @@ Type: `Array`
 Required
 
 The current supported languages. In your sheet, this will be a column. This is will also be used as the generated file's name.
-
-## Contributing
-Coming soon.
-
-## Release History
-0.0.1 - Initial release of this plugin. Only exports JSON. Html characters are currently not supported.
