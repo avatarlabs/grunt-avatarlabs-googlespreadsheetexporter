@@ -30,7 +30,12 @@ grunt.initConfig({
       spreadSheetId: '',
       worksheetName: 'lang',
       languages: ['eng', 'es']
-      format: 'json'
+      format: 'json',
+      "oauth2": {
+        "client_id": "751010553762-3numb6hsojh9h3ha8fdlldpdj48nb9v8.apps.googleusercontent.com",
+        "client_secret": "oIW02KT5UVxOiHjwjfY-rhUp",
+        "refresh_token": "1/lwGNQaNuVr8gyNuD4MMNLv3orkpP9DCqqDGWKE_BDtQ"
+      }
     },
     your_target: {
       // Target-specific file lists and/or options go here.
@@ -39,6 +44,10 @@ grunt.initConfig({
   },
 });
 ```
+
+### Authentication
+
+This plugin now uses oauth2 to login to Google. Please include oauth2 from above overview and keep it private as its an Avatarlabs specific login.
 
 ### Options
 

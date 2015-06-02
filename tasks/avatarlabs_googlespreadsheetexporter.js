@@ -33,83 +33,16 @@ function Task (grunt) {
       grunt.file.mkdir(options.dest)
     }
 
-    //check user's email, password exists in the keychain, if not, request.
-
-    keychain.getPassword({ account: KEYCHAIN_ACCOUNT, service: KEYCHAIN_SERVICE, type: KEYCHAIN_TYPE }, function ( err, password ) {
-      if (err) {
-        grunt.log.warn('WARNING: ' + err.message);
-
-        return Task.askForEmail(grunt, options);
-      }
-
-      var gAccount = password.split(":"), gEmail = gAccount[0], gPass = gAccount[1];
-
-      options.username = gEmail;
-      options.password = gPass;
-
-      Task.runTask(grunt, options);
-    });
+    Task.runTask(grunt, options);
   });
 }
-
-Task.askForEmail = function (grunt, options) {
-  // read user's email
-  read({
-    prompt: 'Google Account Email: '
-  }, function (error, email) {
-    if (error) return grunt.fail.warn(error.message);
-
-    if (!email || email === '') {
-      grunt.log.warn('Please enter your email.');
-
-      return Task.askForEmail(grunt, options);
-    }
-
-    options.username = email;
-
-    Task.askForPassword(grunt, options);
-  });
-}
-
-Task.askForPassword = function (grunt, options) {
-  read({
-    prompt: 'Google Account password: ',
-    silent: true
-  }, function (error, password) {
-    if (error) {
-      return grunt.fail.warn(error.message);
-    }
-
-    if (!password || password == '') {
-      grunt.log.warn('Please enter your password.');
-
-      return Task.askForPassword(grunt, options);
-    }
-
-    //save users password to keychain for later use.
-    var gAccount = options.username + ":" + password;
-
-    keychain.setPassword({ account: KEYCHAIN_ACCOUNT, service: KEYCHAIN_SERVICE, type: KEYCHAIN_TYPE, password: gAccount}, function (error) {
-      if (error) {
-        return grunt.fail.warn(error.message);
-      }
-
-      //save password to options
-      options.password = password;
-
-      Task.runTask(grunt, options);
-    });
-  })
-}
-
 
 Task.runTask = function (grunt, options) {
   GoogleSpreadsheet.load({
     debug: false,
     spreadsheetId: options.spreadSheetId,
     worksheetName: options.worksheetName,
-    username: options.username,
-    password: options.password,
+    "oauth2": options["oauth2"],
     useCellTextValues: (_.has(options, 'useCellTextValues')) ? options.useCellTextValues : true
   }, function (error, spreadsheet) {
 
