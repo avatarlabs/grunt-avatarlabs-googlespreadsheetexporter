@@ -29,7 +29,7 @@ grunt.initConfig({
       // Task-specific options go here.
       spreadSheetId: '',
       worksheetName: 'lang',
-      languages: ['eng', 'es']
+      languages: ['eng', 'es'],
       format: 'json',
       "oauth2": {
         "client_id": "751010553762-3numb6hsojh9h3ha8fdlldpdj48nb9v8.apps.googleusercontent.com",
