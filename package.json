@@ -30,10 +30,10 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "async": "0.9.0",
-    "keychain": "0.0.4",
-    "read": "1.0.5",
+    "async": "1.5.2",
+    "keychain": "1.0.0",
+    "read": "1.0.7",
     "underscore": "1.8.3",
-    "edit-google-spreadsheet": "0.2.19"
+    "edit-google-spreadsheet": "0.2.21"
   }
 }
